@@ -1,911 +1,903 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pastel Math Study Guide & AI Tutor</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Quicksand:wght@500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        pastel: {
-                            lavender: '#E8E2F3',
-                            peach: '#FCE4D6',
-                            yellow: '#FEF3C7',
-                            sage: '#E3ECDE',
-                            blue: '#E0F2FE',
-                            blush: '#FCE7F3',
-                            cream: '#FAF7F2',
-                            paper: '#FFFDF9',
-                            ink: '#38322C',
-                            muted: '#786F65'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Outfit', 'sans-serif'],
-                        hand: ['Caveat', 'cursive'],
-                        quicksand: ['Quicksand', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body {
-            background-color: #FAF7F2;
-            color: #38322C;
-            background-image: radial-gradient(#e5ddd0 1px, transparent 1px);
-            background-size: 24px 24px;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cozy Math Corner | Interactive Math Notebook</title>
 
-        .paper-card {
-            background: #FFFDF9;
-            box-shadow: 4px 6px 15px rgba(56, 50, 44, 0.05), inset 0 0 40px rgba(254, 243, 199, 0.25);
-            border: 1px solid #E8E2F3;
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Quicksand:wght@500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
+
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        pastel: {
+          lavender: '#E8E2F3',
+          peach: '#FCE4D6',
+          yellow: '#FEF3C7',
+          sage: '#E3ECDE',
+          blue: '#E0F2FE',
+          blush: '#FCE7F3',
+          cream: '#FAF7F2',
+          paper: '#FFFDF9',
+          ink: '#38322C',
+          muted: '#786F65'
         }
+      },
+      fontFamily: {
+        sans: ['Outfit', 'sans-serif'],
+        quicksand: ['Quicksand', 'sans-serif'],
+        hand: ['Caveat', 'cursive']
+      }
+    }
+  }
+};
+</script>
 
-        .paper-card:hover {
-            transform: translateY(-3px) rotate(0.3deg);
-            box-shadow: 6px 10px 20px rgba(56, 50, 44, 0.08);
-        }
+<style>
+body {
+  background: #FAF7F2;
+  color: #38322C;
+  background-image: radial-gradient(#e5ddd0 1px, transparent 1px);
+  background-size: 24px 24px;
+}
 
-        .sticky-note-yellow { background-color: #FEF3C7; box-shadow: 2px 4px 10px rgba(217, 119, 6, 0.1); transform: rotate(-1deg); }
-        .sticky-note-peach { background-color: #FCE4D6; box-shadow: 2px 4px 10px rgba(194, 65, 12, 0.1); transform: rotate(1deg); }
-        .sticky-note-sage { background-color: #E3ECDE; box-shadow: 2px 4px 10px rgba(22, 101, 52, 0.1); transform: rotate(-0.5deg); }
-        .sticky-note-lavender { background-color: #E8E2F3; box-shadow: 2px 4px 10px rgba(109, 40, 217, 0.1); transform: rotate(0.5deg); }
-        .sticky-note-blue { background-color: #E0F2FE; box-shadow: 2px 4px 10px rgba(3, 105, 161, 0.1); transform: rotate(-1deg); }
-        .sticky-note-blush { background-color: #FCE7F3; box-shadow: 2px 4px 10px rgba(190, 24, 93, 0.1); transform: rotate(1deg); }
+.paper-card {
+  background: #FFFDF9;
+  box-shadow: 4px 6px 15px #38322c0d;
+  border: 1px solid #E8E2F3;
+  transition: transform .2s, box-shadow .2s;
+}
 
-        .handwritten { font-family: 'Caveat', cursive; }
+.paper-card:hover {
+  box-shadow: 6px 10px 20px #38322c12;
+}
 
-        .aspect-video-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            border-radius: 1rem;
-        }
-        .aspect-video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
+.sticky-note-yellow { background: #FEF3C7; }
+.sticky-note-peach { background: #FCE4D6; }
+.sticky-note-sage { background: #E3ECDE; }
+.sticky-note-lavender { background: #E8E2F3; }
+.sticky-note-blue { background: #E0F2FE; }
+.sticky-note-blush { background: #FCE7F3; }
 
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #FAF7F2; }
-        ::-webkit-scrollbar-thumb { background: #D6CEC2; border-radius: 4px; }
-    </style>
+.handwritten { font-family: Caveat, cursive; }
+.hidden { display: none !important; }
+
+.feedback {
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-size: .92rem;
+  margin-top: 12px;
+}
+
+.good {
+  background: #E3ECDE;
+  color: #14532d;
+  border: 1px solid #bbd6b5;
+}
+
+.try {
+  background: #FCE4D6;
+  color: #7c2d12;
+  border: 1px solid #f4c8ae;
+}
+
+.hint {
+  background: #FEF3C7;
+  color: #78350f;
+  border: 1px solid #f4dfa0;
+}
+
+.topic-btn {
+  white-space: nowrap;
+  padding: 9px 13px;
+  border-radius: 12px;
+  font-size: .85rem;
+  font-weight: 600;
+  transition: .2s;
+}
+
+.topic-btn.active {
+  background: #E8E2F3;
+  color: #38322C;
+}
+
+.topic-btn:not(.active) {
+  color: #786F65;
+}
+
+.topic-btn:not(.active):hover {
+  background: #FAF7F2;
+}
+
+.answer-input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #d6cec2;
+  background: #fffdf9;
+  border-radius: 12px;
+  outline: none;
+}
+
+.answer-input:focus {
+  border-color: #b6a4d7;
+  box-shadow: 0 0 0 3px #E8E2F3;
+}
+
+.btn {
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-weight: 600;
+  transition: opacity .2s;
+}
+
+.btn:hover { opacity: .82; }
+
+.btn-primary {
+  background: #E8E2F3;
+  color: #44336a;
+}
+
+.btn-soft {
+  background: #fff;
+  border: 1px solid #e6dff0;
+  color: #38322C;
+}
+
+.sieve-cell {
+  border: 1px solid #e5ddd0;
+  border-radius: 8px;
+  padding: 8px 2px;
+  background: white;
+  font-size: .8rem;
+}
+
+.sieve-cell.prime {
+  background: #FCE7F3;
+  border-color: #f3bfd9;
+}
+
+.sieve-cell.selected {
+  outline: 2px solid #9d7acb;
+  outline-offset: 1px;
+}
+
+.progress-track {
+  height: 9px;
+  background: #eee8e0;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0;
+  background: #b8a7d8;
+  transition: width .3s;
+}
+
+.video-box {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #292524;
+}
+
+.video-box iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+</style>
 </head>
-<body class="min-h-screen flex flex-col font-sans selection:bg-pastel-peach">
 
-    <header class="w-full py-5 px-4 md:px-12 flex flex-col lg:flex-row items-center justify-between border-b border-[#E8E2F3]/80 bg-[#FFFDF9]/90 backdrop-blur-md sticky top-0 z-40">
-        <div class="flex items-center space-x-3 cursor-pointer mb-3 lg:mb-0" onclick="switchView('home')">
-            <span class="text-3xl">☕</span>
-            <div>
-                <h1 class="text-2xl font-bold font-quicksand text-pastel-ink tracking-tight">Cozy Math Corner</h1>
-                <p class="text-xs text-pastel-muted font-medium">Handcrafted notebook, visual tools & video lessons</p>
-            </div>
-        </div>
-        <nav class="flex items-center space-x-1.5 md:space-x-3 overflow-x-auto max-w-full pb-2 lg:pb-0 text-xs md:text-sm">
-            <button onclick="switchView('home')" id="nav-home" class="px-3.5 py-2 rounded-xl font-semibold transition-all bg-pastel-lavender text-pastel-ink shadow-sm whitespace-nowrap">Index</button>
-            <button onclick="switchView('algebra')" id="nav-algebra" class="px-3.5 py-2 rounded-xl font-semibold transition-all hover:bg-pastel-peach/50 text-pastel-muted hover:text-pastel-ink whitespace-nowrap">Algebra</button>
-            <button onclick="switchView('fraction')" id="nav-fraction" class="px-3.5 py-2 rounded-xl font-semibold transition-all hover:bg-pastel-yellow/50 text-pastel-muted hover:text-pastel-ink whitespace-nowrap">Fractions</button>
-            <button onclick="switchView('decimal')" id="nav-decimal" class="px-3.5 py-2 rounded-xl font-semibold transition-all hover:bg-pastel-sage/50 text-pastel-muted hover:text-pastel-ink whitespace-nowrap">Decimals</button>
-            <button onclick="switchView('integer')" id="nav-integer" class="px-3.5 py-2 rounded-xl font-semibold transition-all hover:bg-pastel-blue/50 text-pastel-muted hover:text-pastel-ink whitespace-nowrap">Integers</button>
-            <button onclick="switchView('prime_composite')" id="nav-prime_composite" class="px-3.5 py-2 rounded-xl font-semibold transition-all hover:bg-pastel-blush/50 text-pastel-muted hover:text-pastel-ink whitespace-nowrap">Prime & Composite</button>
-            <button onclick="toggleTutor()" class="px-3.5 py-2 rounded-xl font-semibold bg-pastel-peach text-amber-950 shadow-sm flex items-center space-x-1.5 hover:bg-pastel-peach/80 transition-all whitespace-nowrap">
-                <span>✨</span><span>AI Tutor</span>
-            </button>
-        </nav>
-    </header>
+<body class="min-h-screen flex flex-col font-sans">
 
-    <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-8">
-        <!-- Floating Score Banner -->
-        <div class="mb-6 flex justify-between items-center bg-white/80 backdrop-blur border border-pastel-lavender px-5 py-3 rounded-2xl shadow-sm">
-            <div class="flex items-center space-x-2 text-xs md:text-sm text-pastel-ink font-medium">
-                <span>🎯</span>
-                <span>Quiz Practice Tracker:</span>
-                <span id="score-counter" class="font-bold text-purple-900 bg-pastel-lavender px-2.5 py-0.5 rounded-full">0 Correct</span>
-            </div>
-            <button onclick="resetScores()" class="text-xs text-pastel-muted hover:text-pastel-ink underline">Reset Score</button>
-        </div>
+<header class="sticky top-0 z-40 bg-[#FFFDF9]/95 backdrop-blur border-b border-pastel-lavender px-4 md:px-8 py-4">
+  <div class="max-w-6xl mx-auto flex flex-col lg:flex-row gap-3 lg:items-center justify-between">
 
-        <section id="view-home" class="space-y-12">
-            <div class="paper-card p-8 md:p-12 rounded-3xl relative overflow-hidden">
-                <div class="absolute -right-10 -bottom-10 text-9xl opacity-10 select-none pointer-events-none">📐</div>
-                <div class="max-w-2xl space-y-4">
-                    <span class="inline-block px-3 py-1 bg-pastel-lavender text-purple-900 rounded-full text-xs font-semibold tracking-wide uppercase">Interactive Math Notebook</span>
-                    <h2 class="text-4xl md:text-5xl font-bold font-quicksand text-pastel-ink leading-tight">Mathematics, made cozy and clear.</h2>
-                    <p class="text-pastel-muted text-lg font-normal leading-relaxed">
-                        Explore core math topics through visual explanations, video lessons, interactive tools like the Prime Sieve, and an AI tutor powered by Gemini.
-                    </p>
-                    <div class="pt-2 flex flex-wrap gap-3">
-                        <button onclick="switchView('prime_composite')" class="px-5 py-3 bg-pastel-blush text-pink-950 rounded-2xl font-semibold shadow-sm hover:opacity-90 transition-all flex items-center space-x-2">
-                            <span>✨</span><span>New: Prime & Composite Tool</span>
-                        </button>
-                        <button onclick="switchView('algebra')" class="px-5 py-3 bg-pastel-lavender text-purple-950 rounded-2xl font-semibold shadow-sm hover:opacity-90 transition-all flex items-center space-x-2">
-                            <span>🌿</span><span>Algebra Guide</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
+    <button onclick="switchView('home')" class="flex items-center gap-3 text-left">
+      <span class="text-3xl">☕</span>
+      <span>
+        <span class="block text-xl font-bold font-quicksand">Cozy Math Corner</span>
+        <span class="block text-xs text-pastel-muted">A friendly notebook for learning math</span>
+      </span>
+    </button>
 
-            <div>
-                <div class="flex items-center justify-between mb-6">
-                    <h3 class="text-2xl font-bold font-quicksand text-pastel-ink">Study Modules</h3>
-                    <span class="text-sm font-medium text-pastel-muted">Select a topic below</span>
-                </div>
+    <nav class="flex gap-1 overflow-x-auto pb-1" aria-label="Main navigation">
+      <button class="topic-btn active" id="nav-home" onclick="switchView('home')">Index</button>
+      <button class="topic-btn" id="nav-prime_composite" onclick="switchView('prime_composite')">Prime & Composite</button>
+      <button class="topic-btn" id="nav-algebra" onclick="switchView('algebra')">Algebra</button>
+      <button class="topic-btn" id="nav-fraction" onclick="switchView('fraction')">Fractions</button>
+      <button class="topic-btn" id="nav-decimal" onclick="switchView('decimal')">Decimals</button>
+      <button class="topic-btn" id="nav-integer" onclick="switchView('integer')">Integers</button>
+    </nav>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Prime & Composite Card -->
-                    <div onclick="switchView('prime_composite')" class="paper-card p-6 rounded-3xl cursor-pointer sticky-note-blush flex flex-col justify-between group">
-                        <div>
-                            <div class="flex justify-between items-start mb-4">
-                                <span class="text-3xl">🔢</span>
-                                <span class="text-xs font-bold uppercase tracking-wider bg-white/70 px-2.5 py-1 rounded-lg text-pink-900">Interactive</span>
-                            </div>
-                            <h4 class="text-2xl font-bold font-quicksand text-pink-950 mb-2 group-hover:underline">Prime & Composite Numbers</h4>
-                            <p class="text-pink-900/80 text-sm leading-relaxed mb-6">Understand factors, test prime numbers live, and explore the interactive 1-100 Sieve grid.</p>
-                        </div>
-                        <div class="flex items-center justify-between text-xs font-semibold text-pink-950 pt-4 border-t border-pink-900/10">
-                            <span>Visual Tool & Video</span>
-                            <span class="group-hover:translate-x-1 transition-transform">Explore →</span>
-                        </div>
-                    </div>
+  </div>
+</header>
 
-                    <!-- Algebra Card -->
-                    <div onclick="switchView('algebra')" class="paper-card p-6 rounded-3xl cursor-pointer sticky-note-lavender flex flex-col justify-between group">
-                        <div>
-                            <div class="flex justify-between items-start mb-4">
-                                <span class="text-3xl">🌿</span>
-                                <span class="text-xs font-bold uppercase tracking-wider bg-white/70 px-2.5 py-1 rounded-lg text-purple-900">Core Topic</span>
-                            </div>
-                            <h4 class="text-2xl font-bold font-quicksand text-purple-950 mb-2 group-hover:underline">Algebra & Solving for X</h4>
-                            <p class="text-purple-900/80 text-sm leading-relaxed mb-6">Learn how to balance equations and isolate variables with step-by-step videos and quizzes.</p>
-                        </div>
-                        <div class="flex items-center justify-between text-xs font-semibold text-purple-950 pt-4 border-t border-purple-900/10">
-                            <span>Practice + Video Lesson</span>
-                            <span class="group-hover:translate-x-1 transition-transform">Explore →</span>
-                        </div>
-                    </div>
+<main class="max-w-6xl w-full mx-auto px-4 sm:px-6 py-8 flex-1">
 
-                    <!-- Fractions Card -->
-                    <div onclick="switchView('fraction')" class="paper-card p-6 rounded-3xl cursor-pointer sticky-note-yellow flex flex-col justify-between group">
-                        <div>
-                            <div class="flex justify-between items-start mb-4">
-                                <span class="text-3xl">🍕</span>
-                                <span class="text-xs font-bold uppercase tracking-wider bg-white/70 px-2.5 py-1 rounded-lg text-amber-900">Core Topic</span>
-                            </div>
-                            <h4 class="text-2xl font-bold font-quicksand text-amber-950 mb-2 group-hover:underline">Working with Fractions</h4>
-                            <p class="text-amber-900/80 text-sm leading-relaxed mb-6">Master adding, subtracting, and multiplying fractions with intuitive visual models.</p>
-                        </div>
-                        <div class="flex items-center justify-between text-xs font-semibold text-amber-950 pt-4 border-t border-amber-900/10">
-                            <span>Practice + Video Lesson</span>
-                            <span class="group-hover:translate-x-1 transition-transform">Explore →</span>
-                        </div>
-                    </div>
+  <!-- Overall progress tracker -->
+  <div class="mb-7 bg-white/85 border border-pastel-lavender rounded-2xl p-4 sm:px-5 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
 
-                    <!-- Decimals Card -->
-                    <div onclick="switchView('decimal')" class="paper-card p-6 rounded-3xl cursor-pointer sticky-note-sage flex flex-col justify-between group">
-                        <div>
-                            <div class="flex justify-between items-start mb-4">
-                                <span class="text-3xl">🌱</span>
-                                <span class="text-xs font-bold uppercase tracking-wider bg-white/70 px-2.5 py-1 rounded-lg text-green-900">Core Topic</span>
-                            </div>
-                            <h4 class="text-2xl font-bold font-quicksand text-green-950 mb-2 group-hover:underline">Decimals & Place Values</h4>
-                            <p class="text-green-900/80 text-sm leading-relaxed mb-6">Master place values, rounding, and multi-digit decimal arithmetic step by step.</p>
-                        </div>
-                        <div class="flex items-center justify-between text-xs font-semibold text-green-950 pt-4 border-t border-green-900/10">
-                            <span>Practice + Video Lesson</span>
-                            <span class="group-hover:translate-x-1 transition-transform">Explore →</span>
-                        </div>
-                    </div>
-
-                    <!-- Integers Card -->
-                    <div onclick="switchView('integer')" class="paper-card p-6 rounded-3xl cursor-pointer sticky-note-blue flex flex-col justify-between group">
-                        <div>
-                            <div class="flex justify-between items-start mb-4">
-                                <span class="text-3xl">❄️</span>
-                                <span class="text-xs font-bold uppercase tracking-wider bg-white/70 px-2.5 py-1 rounded-lg text-sky-900">Core Topic</span>
-                            </div>
-                            <h4 class="text-2xl font-bold font-quicksand text-sky-950 mb-2 group-hover:underline">Integers & Number Lines</h4>
-                            <p class="text-sky-900/80 text-sm leading-relaxed mb-6">Conquer negative numbers, absolute value, and sign rules without confusion.</p>
-                        </div>
-                        <div class="flex items-center justify-between text-xs font-semibold text-sky-950 pt-4 border-t border-sky-900/10">
-                            <span>Practice + Video Lesson</span>
-                            <span class="group-hover:translate-x-1 transition-transform">Explore →</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="view-prime_composite" class="space-y-8 hidden">
-            <div class="flex items-center justify-between">
-                <button onclick="switchView('home')" class="text-sm font-semibold text-pastel-muted hover:text-pastel-ink flex items-center space-x-1">
-                    <span>← Back to Index</span>
-                </button>
-                <span class="px-3 py-1 bg-pastel-blush text-pink-900 rounded-full text-xs font-semibold">Prime & Composite Guide</span>
-            </div>
-
-            <div class="paper-card p-6 md:p-10 rounded-3xl space-y-8">
-                <div>
-                    <h2 class="text-3xl md:text-4xl font-bold font-quicksand text-pastel-ink mb-3">Prime vs. Composite Numbers</h2>
-                    <p class="text-pastel-muted text-lg">Learn how numbers are built from factors and test any whole number instantly.</p>
-                </div>
-
-                <!-- Explanation cards -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="bg-pastel-blush/40 border border-pastel-blush p-6 rounded-2xl space-y-2">
-                        <div class="flex items-center justify-between">
-                            <h3 class="font-bold text-pink-950 font-quicksand text-lg">🌟 Prime Numbers</h3>
-                            <span class="text-xs font-bold bg-white px-2.5 py-1 rounded-md text-pink-900">Exact 2 Factors</span>
-                        </div>
-                        <p class="text-pastel-ink text-sm leading-relaxed">
-                            A whole number greater than 1 that has <strong>only two factors</strong>: 1 and itself (e.g., 2, 3, 5, 7, 11, 13, 17, 19).
-                        </p>
-                    </div>
-                    <div class="bg-pastel-peach/40 border border-pastel-peach p-6 rounded-2xl space-y-2">
-                        <div class="flex items-center justify-between">
-                            <h3 class="font-bold text-amber-950 font-quicksand text-lg">🧱 Composite Numbers</h3>
-                            <span class="text-xs font-bold bg-white px-2.5 py-1 rounded-md text-amber-900">3+ Factors</span>
-                        </div>
-                        <p class="text-pastel-ink text-sm leading-relaxed">
-                            A whole number greater than 1 that has <strong>more than two factors</strong> (e.g., 4, 6, 8, 9, 10, 12, 15).
-                        </p>
-                    </div>
-                </div>
-
-                <div class="p-4 bg-pastel-yellow/50 border border-pastel-yellow rounded-2xl text-xs sm:text-sm text-pastel-ink flex items-start space-x-3">
-                    <span class="text-xl">💡</span>
-                    <div>
-                        <strong class="font-semibold text-amber-950">Special Case Warning:</strong>
-                        0 and 1 are <em>neither prime nor composite</em>. 1 only has 1 factor (itself), and 0 has infinitely many factors. 2 is the <em>only</em> even prime number!
-                    </div>
-                </div>
-
-                <!-- Interactive Prime Checker Tool -->
-                <div class="border-2 border-dashed border-pink-200 bg-white p-6 md:p-8 rounded-3xl space-y-6 shadow-sm">
-                    <div class="flex items-center justify-between">
-                        <h3 class="text-xl font-bold font-quicksand text-pink-950">🔍 Live Number Factor Checker</h3>
-                        <span class="handwritten text-2xl text-pink-900">Type any number</span>
-                    </div>
-                    <div class="flex flex-col sm:flex-row gap-3">
-                        <input type="number" id="prime-input" placeholder="Enter a number (e.g. 29, 51, 97)" class="flex-1 bg-pastel-cream border border-[#D6CEC2] rounded-2xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-pink-300">
-                        <button onclick="checkPrimeInteractive()" class="px-6 py-3 bg-pastel-blush text-pink-950 font-semibold rounded-2xl hover:opacity-90 transition-all text-sm shadow-sm">
-                            Test Number
-                        </button>
-                    </div>
-                    <div id="prime-checker-result" class="hidden p-4 rounded-2xl text-sm leading-relaxed"></div>
-                </div>
-
-                <!-- Interactive Sieve Visualizer -->
-                <div class="bg-pastel-cream p-6 md:p-8 rounded-3xl border border-[#D6CEC2]/50 space-y-4">
-                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
-                        <div>
-                            <h3 class="text-xl font-bold font-quicksand text-pastel-ink">🧩 Numbers 1 - 100 Sieve Explorer</h3>
-                            <p class="text-xs text-pastel-muted">Click any number box to see its factor breakdown</p>
-                        </div>
-                        <div class="flex items-center space-x-3 text-xs">
-                            <span class="flex items-center space-x-1"><span class="w-3 h-3 bg-pastel-blush border border-pink-300 rounded"></span><span>Prime</span></span>
-                            <span class="flex items-center space-x-1"><span class="w-3 h-3 bg-white border border-gray-300 rounded"></span><span>Composite</span></span>
-                        </div>
-                    </div>
-                    <div id="sieve-grid" class="grid grid-cols-5 sm:grid-cols-10 gap-1.5 pt-2"></div>
-                    <div id="sieve-detail" class="text-xs text-pastel-ink bg-white p-3 rounded-xl border border-pastel-lavender hidden font-mono"></div>
-                </div>
-
-                <!-- Video Lesson Section -->
-                <div class="space-y-4">
-                    <h3 class="text-xl font-bold font-quicksand text-pastel-ink flex items-center space-x-2">
-                        <span>📹</span><span>Video Lesson: Prime vs Composite</span>
-                    </h3>
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                        <div class="lg:col-span-2 aspect-video-container bg-black shadow-md">
-                            <iframe src="https://www.youtube-nocookie.com/embed/gT41yr1SrfI" title="Prime and Composite Numbers Video Lesson" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                        <div class="paper-card p-5 rounded-2xl space-y-3 bg-pastel-blush/20">
-                            <div class="flex items-center justify-between text-xs text-pink-900 font-semibold">
-                                <span>Math Antics / Visual Guide</span>
-                                <span>~10 mins</span>
-                            </div>
-                            <h4 class="font-bold text-pink-950 text-base">Key Video Takeaways</h4>
-                            <ul class="text-xs space-y-2 text-pastel-ink list-disc pl-4 leading-relaxed">
-                                <li>Factors are numbers you multiply together to get a product.</li>
-                                <li>Prime numbers cannot be divided evenly into smaller whole groups.</li>
-                                <li>Composite numbers can be broken down into prime factor trees.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Quiz -->
-                <div class="bg-pastel-cream p-6 md:p-8 rounded-3xl border border-[#D6CEC2]/50 space-y-6">
-                    <h3 class="text-xl font-bold font-quicksand text-pastel-ink">✨ Practice Question</h3>
-                    <div class="space-y-4">
-                        <p class="font-medium text-pastel-ink">Is the number <strong class="text-lg text-pink-900">51</strong> prime or composite?</p>
-                        <div class="flex flex-wrap gap-3">
-                            <button onclick="checkAnswer('prime', 'prime', 'composite', '51 is divisible by 3 and 17 (3 × 17 = 51), so it has 4 factors: 1, 3, 17, and 51!')" class="px-5 py-2.5 bg-white border border-pink-200 rounded-xl font-semibold text-pastel-ink hover:bg-pastel-blush transition-all">Prime</button>
-                            <button onclick="checkAnswer('prime', 'composite', 'composite', 'Correct! 51 = 3 × 17, making it composite.')" class="px-5 py-2.5 bg-white border border-pink-200 rounded-xl font-semibold text-pastel-ink hover:bg-pastel-blush transition-all">Composite</button>
-                            <button onclick="checkAnswer('prime', 'neither', 'composite', '0 and 1 are special cases, but 51 is a composite number.')" class="px-5 py-2.5 bg-white border border-pink-200 rounded-xl font-semibold text-pastel-ink hover:bg-pastel-blush transition-all">Neither</button>
-                        </div>
-                        <div id="feedback-prime" class="hidden p-4 rounded-xl text-sm font-medium"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="view-algebra" class="space-y-8 hidden">
-            <div class="flex items-center justify-between">
-                <button onclick="switchView('home')" class="text-sm font-semibold text-pastel-muted hover:text-pastel-ink flex items-center space-x-1">
-                    <span>← Back to Index</span>
-                </button>
-                <span class="px-3 py-1 bg-pastel-lavender text-purple-900 rounded-full text-xs font-semibold">Algebra Guide</span>
-            </div>
-
-            <div class="paper-card p-6 md:p-10 rounded-3xl space-y-8">
-                <div>
-                    <h2 class="text-3xl md:text-4xl font-bold font-quicksand text-pastel-ink mb-3">Solving for X & Basic Equations</h2>
-                    <p class="text-pastel-muted text-lg">Algebra is simply solving puzzles where one piece is hidden (called $x$). Your goal is always to keep both sides of the equation balanced.</p>
-                </div>
-
-                <div class="bg-pastel-lavender/40 border border-pastel-lavender p-6 rounded-2xl space-y-3">
-                    <h3 class="font-bold text-purple-950 font-quicksand text-lg">💡 Golden Rule of Algebra</h3>
-                    <p class="text-pastel-ink text-sm leading-relaxed">
-                        Whatever you do to one side of the equals sign <strong class="underline">must</strong> be done to the other side!
-                    </p>
-                </div>
-
-                <div class="border-2 border-dashed border-purple-200 bg-white p-6 md:p-8 rounded-3xl space-y-4 shadow-sm">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold uppercase tracking-wider text-purple-800 bg-pastel-lavender px-3 py-1 rounded-lg">Worked Example</span>
-                        <span class="handwritten text-2xl text-purple-900">Step-by-step whiteboard</span>
-                    </div>
-                    <div class="text-xl font-bold font-quicksand text-pastel-ink py-2">
-                        Solve for $x$: &nbsp;&nbsp; <span class="text-purple-700">3x + 5 = 17</span>
-                    </div>
-                    <div class="space-y-2 text-sm text-pastel-ink pl-4 border-l-2 border-purple-300">
-                        <p><strong>Step 1:</strong> Subtract 5 from both sides: <code class="text-purple-900 bg-purple-50 px-2 py-1 rounded">3x = 12</code></p>
-                        <p><strong>Step 2:</strong> Divide both sides by 3: <strong class="text-purple-800 text-base">x = 4</strong></p>
-                    </div>
-                </div>
-
-                <!-- Video Lesson Section -->
-                <div class="space-y-4">
-                    <h3 class="text-xl font-bold font-quicksand text-pastel-ink flex items-center space-x-2">
-                        <span>📹</span><span>Video Lesson: Algebra Basics</span>
-                    </h3>
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                        <div class="lg:col-span-2 aspect-video-container bg-black shadow-md">
-                            <iframe src="https://www.youtube-nocookie.com/embed/l3XzepN03KQ" title="Algebra Basics Video Lesson" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                        <div class="paper-card p-5 rounded-2xl space-y-3 bg-pastel-lavender/30">
-                            <div class="flex items-center justify-between text-xs text-purple-900 font-semibold">
-                                <span>Math Antics / Algebra</span>
-                                <span>~11 mins</span>
-                            </div>
-                            <h4 class="font-bold text-purple-950 text-base">Key Video Takeaways</h4>
-                            <ul class="text-xs space-y-2 text-pastel-ink list-disc pl-4 leading-relaxed">
-                                <li>Inverse operations undo each other (addition undos subtraction).</li>
-                                <li>Always perform operations in reverse order of operations when solving for $x$.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-pastel-cream p-6 md:p-8 rounded-3xl border border-[#D6CEC2]/50 space-y-6">
-                    <h3 class="text-xl font-bold font-quicksand text-pastel-ink">✨ Practice Question</h3>
-                    <div class="space-y-4">
-                        <p class="font-medium text-pastel-ink">Solve for $x$: &nbsp; <strong class="text-lg">2x - 4 = 10</strong></p>
-                        <div class="flex flex-wrap gap-3">
-                            <button onclick="checkAnswer('algebra', 7, 7, 'Add 4 to both sides (2x = 14), then divide by 2 (x = 7)!')" class="px-5 py-2.5 bg-white border border-purple-200 rounded-xl font-semibold text-pastel-ink hover:bg-pastel-lavender transition-all">x = 7</button>
-                            <button onclick="checkAnswer('algebra', 3, 7, 'Remember to add 4 to 10 first to get 14!')" class="px-5 py-2.5 bg-white border border-purple-200 rounded-xl font-semibold text-pastel-ink hover:bg-pastel-lavender transition-all">x = 3</button>
-                            <button onclick="checkAnswer('algebra', 5, 7, 'Check your balance steps carefully!')" class="px-5 py-2.5 bg-white border border-purple-200 rounded-xl font-semibold text-pastel-ink hover:bg-pastel-lavender transition-all">x = 5</button>
-                        </div>
-                        <div id="feedback-algebra" class="hidden p-4 rounded-xl text-sm font-medium"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="view-fraction" class="space-y-8 hidden">
-            <div class="flex items-center justify-between">
-                <button onclick="switchView('home')" class="text-sm font-semibold text-pastel-muted hover:text-pastel-ink flex items-center space-x-1">
-                    <span>← Back to Index</span>
-                </button>
-                <span class="px-3 py-1 bg-pastel-yellow text-amber-900 rounded-full text-xs font-semibold">Fractions Guide</span>
-            </div>
-
-            <div class="paper-card p-6 md:p-10 rounded-3xl space-y-8">
-                <div>
-                    <h2 class="text-3xl md:text-4xl font-bold font-quicksand text-pastel-ink mb-3">Adding & Subtracting Fractions</h2>
-                    <p class="text-pastel-muted text-lg">Fractions represent equal parts of a whole shape or number.</p>
-                </div>
-
-                <div class="bg-pastel-yellow/40 border border-pastel-yellow p-6 rounded-2xl space-y-3">
-                    <h3 class="font-bold text-amber-950 font-quicksand text-lg">🍕 Common Denominators</h3>
-                    <p class="text-pastel-ink text-sm leading-relaxed">
-                        Match the bottom numbers before adding or subtracting top numbers!
-                    </p>
-                </div>
-
-                <div class="border-2 border-dashed border-amber-200 bg-white p-6 md:p-8 rounded-3xl space-y-4 shadow-sm">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold uppercase tracking-wider text-amber-800 bg-pastel-yellow px-3 py-1 rounded-lg">Worked Example</span>
-                        <span class="handwritten text-2xl text-amber-900">Step-by-step</span>
-                    </div>
-                    <div class="text-xl font-bold font-quicksand text-pastel-ink py-2">
-                        Add: &nbsp;&nbsp; <span class="text-amber-700">1/4 + 2/3</span>
-                    </div>
-                    <div class="space-y-2 text-sm text-pastel-ink pl-4 border-l-2 border-amber-300">
-                        <p>Common denominator = 12: <code class="text-amber-900 bg-amber-50 px-2 py-1 rounded">3/12 + 8/12 = 11/12</code></p>
-                    </div>
-                </div>
-
-                <!-- Video Lesson Section -->
-                <div class="space-y-4">
-                    <h3 class="text-xl font-bold font-quicksand text-pastel-ink flex items-center space-x-2">
-                        <span>📹</span><span>Video Lesson: Fraction Basics</span>
-                    </h3>
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                        <div class="lg:col-span-2 aspect-video-container bg-black shadow-md">
-                            <iframe src="https://www.youtube-nocookie.com/embed/52ZlXsFJULI" title="Fractions Video Lesson" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                        <div class="paper-card p-5 rounded-2xl space-y-3 bg-pastel-yellow/30">
-                            <div class="flex items-center justify-between text-xs text-amber-900 font-semibold">
-                                <span>Math Antics / Fractions</span>
-                                <span>~9 mins</span>
-                            </div>
-                            <h4 class="font-bold text-amber-950 text-base">Key Video Takeaways</h4>
-                            <ul class="text-xs space-y-2 text-pastel-ink list-disc pl-4 leading-relaxed">
-                                <li>Numerators count how many parts you have.</li>
-                                <li>Denominators show total equal parts in one whole.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-pastel-cream p-6 md:p-8 rounded-3xl border border-[#D6CEC2]/50 space-y-6">
-                    <h3 class="text-xl font-bold font-quicksand text-pastel-ink">✨ Practice Question</h3>
-                    <div class="space-y-4">
-                        <p class="font-medium text-pastel-ink">What is: &nbsp; <strong class="text-lg">3/5 + 1/5</strong> ?</p>
-                        <div class="flex flex-wrap gap-3">
-                            <button onclick="checkAnswer('fraction', '4/10', '4/5', 'Don\'t add the bottom denominators together!')" class="px-5 py-2.5 bg-white border border-amber-200 rounded-xl font-semibold text-pastel-ink hover:bg-pastel-yellow transition-all">4/10</button>
-                            <button onclick="checkAnswer('fraction', '4/5', '4/5', 'Correct! 3 + 1 = 4 over denominator 5.')" class="px-5 py-2.5 bg-white border border-amber-200 rounded-xl font-semibold text-pastel-ink hover:bg-pastel-yellow transition-all">4/5</button>
-                            <button onclick="checkAnswer('fraction', '3/25', '4/5', 'Keep the bottom number unchanged!')" class="px-5 py-2.5 bg-white border border-amber-200 rounded-xl font-semibold text-pastel-ink hover:bg-pastel-yellow transition-all">3/25</button>
-                        </div>
-                        <div id="feedback-fraction" class="hidden p-4 rounded-xl text-sm font-medium"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="view-decimal" class="space-y-8 hidden">
-            <div class="flex items-center justify-between">
-                <button onclick="switchView('home')" class="text-sm font-semibold text-pastel-muted hover:text-pastel-ink flex items-center space-x-1">
-                    <span>← Back to Index</span>
-                </button>
-                <span class="px-3 py-1 bg-pastel-sage text-green-900 rounded-full text-xs font-semibold">Decimals Guide</span>
-            </div>
-
-            <div class="paper-card p-6 md:p-10 rounded-3xl space-y-8">
-                <div>
-                    <h2 class="text-3xl md:text-4xl font-bold font-quicksand text-pastel-ink mb-3">Decimals & Place Values</h2>
-                    <p class="text-pastel-muted text-lg">Decimals express fractional amounts in base-10 format.</p>
-                </div>
-
-                <div class="border-2 border-dashed border-green-200 bg-white p-6 md:p-8 rounded-3xl space-y-4 shadow-sm">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold uppercase tracking-wider text-green-800 bg-pastel-sage px-3 py-1 rounded-lg">Worked Example</span>
-                        <span class="handwritten text-2xl text-green-900">Step-by-step</span>
-                    </div>
-                    <div class="text-xl font-bold font-quicksand text-pastel-ink py-2">
-                        Calculate: &nbsp;&nbsp; <span class="text-green-700">14.25 + 3.8</span>
-                    </div>
-                    <div class="space-y-2 text-sm text-pastel-ink pl-4 border-l-2 border-green-300">
-                        <p>Line up decimal points: <code class="text-green-900 bg-green-50 px-2 py-1 rounded">14.25 + 3.80 = 18.05</code></p>
-                    </div>
-                </div>
-
-                <!-- Video Lesson Section -->
-                <div class="space-y-4">
-                    <h3 class="text-xl font-bold font-quicksand text-pastel-ink flex items-center space-x-2">
-                        <span>📹</span><span>Video Lesson: Decimal Operations</span>
-                    </h3>
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                        <div class="lg:col-span-2 aspect-video-container bg-black shadow-md">
-                            <iframe src="https://www.youtube-nocookie.com/embed/kwh4222fA2U" title="Decimals Video Lesson" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                        <div class="paper-card p-5 rounded-2xl space-y-3 bg-pastel-sage/30">
-                            <div class="flex items-center justify-between text-xs text-green-900 font-semibold">
-                                <span>Math Antics / Decimals</span>
-                                <span>~12 mins</span>
-                            </div>
-                            <h4 class="font-bold text-green-950 text-base">Key Video Takeaways</h4>
-                            <ul class="text-xs space-y-2 text-pastel-ink list-disc pl-4 leading-relaxed">
-                                <li>Place values go tenths, hundredths, thousandths after the dot.</li>
-                                <li>Padded zeros help maintain vertical balance when calculating.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-pastel-cream p-6 md:p-8 rounded-3xl border border-[#D6CEC2]/50 space-y-6">
-                    <h3 class="text-xl font-bold font-quicksand text-pastel-ink">✨ Practice Question</h3>
-                    <div class="space-y-4">
-                        <p class="font-medium text-pastel-ink">What is: &nbsp; <strong class="text-lg">5.4 - 2.15</strong> ?</p>
-                        <div class="flex flex-wrap gap-3">
-                            <button onclick="checkAnswer('decimal', 3.25, 3.25, 'Great job! 5.40 - 2.15 = 3.25')" class="px-5 py-2.5 bg-white border border-green-200 rounded-xl font-semibold text-pastel-ink hover:bg-pastel-sage transition-all">3.25</button>
-                            <button onclick="checkAnswer('decimal', 3.35, 3.25, 'Don\'t forget to borrow across decimal places!')" class="px-5 py-2.5 bg-white border border-green-200 rounded-xl font-semibold text-pastel-ink hover:bg-pastel-sage transition-all">3.35</button>
-                        </div>
-                        <div id="feedback-decimal" class="hidden p-4 rounded-xl text-sm font-medium"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="view-integer" class="space-y-8 hidden">
-            <div class="flex items-center justify-between">
-                <button onclick="switchView('home')" class="text-sm font-semibold text-pastel-muted hover:text-pastel-ink flex items-center space-x-1">
-                    <span>← Back to Index</span>
-                </button>
-                <span class="px-3 py-1 bg-pastel-blue text-sky-900 rounded-full text-xs font-semibold">Integers Guide</span>
-            </div>
-
-            <div class="paper-card p-6 md:p-10 rounded-3xl space-y-8">
-                <div>
-                    <h2 class="text-3xl md:text-4xl font-bold font-quicksand text-pastel-ink mb-3">Integers & Signed Numbers</h2>
-                    <p class="text-pastel-muted text-lg">Understand positive numbers, negative numbers, and number lines.</p>
-                </div>
-
-                <div class="border-2 border-dashed border-sky-200 bg-white p-6 md:p-8 rounded-3xl space-y-4 shadow-sm">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold uppercase tracking-wider text-sky-800 bg-pastel-blue px-3 py-1 rounded-lg">Worked Example</span>
-                        <span class="handwritten text-2xl text-sky-900">Step-by-step</span>
-                    </div>
-                    <div class="text-xl font-bold font-quicksand text-pastel-ink py-2">
-                        Calculate: &nbsp;&nbsp; <span class="text-sky-700">-8 + 12</span>
-                    </div>
-                    <div class="space-y-2 text-sm text-pastel-ink pl-4 border-l-2 border-sky-300">
-                        <p>Move 12 steps right from -8 on the number line to land on <strong class="text-sky-800">4</strong>.</p>
-                    </div>
-                </div>
-
-                <!-- Video Lesson Section -->
-                <div class="space-y-4">
-                    <h3 class="text-xl font-bold font-quicksand text-pastel-ink flex items-center space-x-2">
-                        <span>📹</span><span>Video Lesson: Integers & Signs</span>
-                    </h3>
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                        <div class="lg:col-span-2 aspect-video-container bg-black shadow-md">
-                            <iframe src="https://www.youtube-nocookie.com/embed/OAoLCXpao6s" title="Integers Video Lesson" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                        <div class="paper-card p-5 rounded-2xl space-y-3 bg-pastel-blue/30">
-                            <div class="flex items-center justify-between text-xs text-sky-900 font-semibold">
-                                <span>Math Antics / Integers</span>
-                                <span>~10 mins</span>
-                            </div>
-                            <h4 class="font-bold text-sky-950 text-base">Key Video Takeaways</h4>
-                            <ul class="text-xs space-y-2 text-pastel-ink list-disc pl-4 leading-relaxed">
-                                <li>Negative signs indicate opposite direction on number line.</li>
-                                <li>Multiplying two negative numbers produces a positive product.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-pastel-cream p-6 md:p-8 rounded-3xl border border-[#D6CEC2]/50 space-y-6">
-                    <h3 class="text-xl font-bold font-quicksand text-pastel-ink">✨ Practice Question</h3>
-                    <div class="space-y-4">
-                        <p class="font-medium text-pastel-ink">What is: &nbsp; <strong class="text-lg">-5 × (-4)</strong> ?</p>
-                        <div class="flex flex-wrap gap-3">
-                            <button onclick="checkAnswer('integer', -20, 20, 'Negative times negative yields positive!')" class="px-5 py-2.5 bg-white border border-sky-200 rounded-xl font-semibold text-pastel-ink hover:bg-pastel-blue transition-all">-20</button>
-                            <button onclick="checkAnswer('integer', 20, 20, 'Correct! Two negative signs cancel out to make positive 20.')" class="px-5 py-2.5 bg-white border border-sky-200 rounded-xl font-semibold text-pastel-ink hover:bg-pastel-blue transition-all">20</button>
-                        </div>
-                        <div id="feedback-integer" class="hidden p-4 rounded-xl text-sm font-medium"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <div id="ai-tutor-sidebar" class="fixed right-0 top-0 h-full w-full sm:w-[420px] bg-[#FFFDF9] border-l border-[#E8E2F3] shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col">
-        <div class="p-4 md:p-6 border-b border-[#E8E2F3] flex items-center justify-between bg-pastel-lavender/30">
-            <div class="flex items-center space-x-3">
-                <span class="text-2xl bg-white p-2 rounded-2xl shadow-sm">🌿</span>
-                <div>
-                    <h3 class="font-bold font-quicksand text-pastel-ink text-lg">Mini AI Math Tutor</h3>
-                    <p class="text-xs text-pastel-muted">Gentle, step-by-step math assistance</p>
-                </div>
-            </div>
-            <button onclick="toggleTutor()" class="p-2 hover:bg-white/80 rounded-full transition-colors text-pastel-muted hover:text-pastel-ink">
-                ✕
-            </button>
-        </div>
-
-        <div id="chat-messages" class="flex-1 p-4 md:p-6 overflow-y-auto space-y-4 text-xs sm:text-sm">
-            <div class="flex items-start space-x-3">
-                <div class="w-8 h-8 rounded-full bg-pastel-peach flex items-center justify-center font-bold flex-shrink-0">AI</div>
-                <div class="paper-card p-4 rounded-2xl rounded-tl-sm text-pastel-ink space-y-2">
-                    <p>Hello! 🌱 Ask me anything about <strong>algebra, fractions, decimals, integers, or prime & composite numbers</strong>!</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Preset Chips -->
-        <div class="px-4 py-2 border-t border-[#E8E2F3]/60 bg-pastel-cream/50 flex gap-2 overflow-x-auto text-xs">
-            <button onclick="askPreset('Explain prime vs composite numbers in simple terms.')" class="px-3 py-1.5 bg-white border border-[#D6CEC2] rounded-xl whitespace-nowrap hover:bg-pastel-blush transition-colors">✨ Prime vs Composite</button>
-            <button onclick="askPreset('How do I add fractions with different denominators?')" class="px-3 py-1.5 bg-white border border-[#D6CEC2] rounded-xl whitespace-nowrap hover:bg-pastel-yellow transition-colors">🍕 Fractions help</button>
-            <button onclick="askPreset('Help me solve 2x + 5 = 15 step by step.')" class="px-3 py-1.5 bg-white border border-[#D6CEC2] rounded-xl whitespace-nowrap hover:bg-pastel-lavender transition-colors">🌿 Algebra steps</button>
-        </div>
-
-        <div class="p-4 border-t border-[#E8E2F3] bg-white">
-            <form onsubmit="handleChatSubmit(event)" class="flex items-center space-x-2">
-                <input type="text" id="chat-input" placeholder="Ask your math question..." class="flex-1 bg-pastel-cream border border-[#D6CEC2] rounded-2xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-purple-300">
-                <button type="submit" id="chat-submit-btn" class="px-5 py-3 bg-pastel-lavender text-purple-950 font-semibold rounded-2xl hover:opacity-90 transition-all text-xs sm:text-sm shadow-sm">
-                    Send
-                </button>
-            </form>
-        </div>
+    <div>
+      <div class="font-semibold">🎯 Your practice progress</div>
+      <div class="text-sm text-pastel-muted">
+        <span id="score-counter">0 correct</span>
+        ·
+        <span id="attempt-counter">0 attempted</span>
+      </div>
     </div>
 
-    <footer class="w-full py-6 text-center text-xs text-pastel-muted border-t border-[#E8E2F3] mt-12">
-        <p>Crafted with care & clarity. A friendly space for learning mathematics. ✨</p>
-    </footer>
+    <div class="w-full sm:w-56">
+      <div class="progress-track">
+        <div class="progress-fill" id="overall-progress"></div>
+      </div>
+      <div class="text-xs text-pastel-muted mt-1" id="progress-label">
+        Start a worksheet to build your progress!
+      </div>
+    </div>
 
-    <script>
-        let correctScores = 0;
+    <button class="text-sm underline text-pastel-muted self-start sm:self-auto" onclick="resetScores()">
+      Reset progress
+    </button>
 
-        function switchView(viewId) {
-            const views = ['home', 'algebra', 'fraction', 'decimal', 'integer', 'prime_composite'];
-            views.forEach(v => {
-                const el = document.getElementById(`view-${v}`);
-                if (el) el.classList.add('hidden');
-                const navEl = document.getElementById(`nav-${v}`);
-                if (navEl) {
-                    navEl.className = "px-3.5 py-2 rounded-xl font-semibold transition-all hover:bg-pastel-cream text-pastel-muted hover:text-pastel-ink whitespace-nowrap";
-                }
-            });
+  </div>
 
-            const target = document.getElementById(`view-${viewId}`);
-            if (target) target.classList.remove('hidden');
+  <!-- HOME / INDEX PAGE -->
+  <section id="view-home" class="space-y-10">
 
-            const activeNav = document.getElementById(`nav-${viewId}`);
-            if (activeNav) {
-                const colors = {
-                    home: 'bg-pastel-lavender text-pastel-ink',
-                    algebra: 'bg-pastel-lavender text-purple-950',
-                    fraction: 'bg-pastel-yellow text-amber-950',
-                    decimal: 'bg-pastel-sage text-green-950',
-                    integer: 'bg-pastel-blue text-sky-950',
-                    prime_composite: 'bg-pastel-blush text-pink-950'
-                };
-                activeNav.className = `px-3.5 py-2 rounded-xl font-semibold shadow-sm whitespace-nowrap ${colors[viewId] || 'bg-pastel-lavender text-pastel-ink'}`;
-            }
+    <div class="paper-card rounded-3xl p-8 md:p-12 relative overflow-hidden">
+      <div class="absolute right-5 bottom-0 text-8xl opacity-10">📐</div>
 
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+      <div class="relative max-w-2xl space-y-4">
 
-        function toggleTutor() {
-            document.getElementById('ai-tutor-sidebar').classList.toggle('translate-x-full');
-        }
+        <span class="inline-block px-3 py-1 rounded-full bg-pastel-lavender text-purple-900 text-xs font-bold uppercase tracking-wide">
+          Interactive Math Notebook
+        </span>
 
-        function checkAnswer(topic, selected, correct, explanation) {
-            const feedbackEl = document.getElementById(`feedback-${topic}`);
-            feedbackEl.classList.remove('hidden');
+        <h1 class="text-4xl md:text-5xl font-bold font-quicksand leading-tight">
+          Mathematics, made cozy and clear.
+        </h1>
 
-            if (selected === correct) {
-                correctScores++;
-                updateScoreTracker();
-                feedbackEl.className = "p-4 rounded-xl text-sm font-medium bg-pastel-sage text-green-950 border border-green-200";
-                feedbackEl.innerHTML = `🎉 <strong>Correct!</strong> ${explanation}`;
-            } else {
-                feedbackEl.className = "p-4 rounded-xl text-sm font-medium bg-pastel-peach text-amber-950 border border-amber-200";
-                feedbackEl.innerHTML = `🌱 <strong>Give it another thought!</strong> ${explanation}`;
-            }
-        }
+        <p class="text-pastel-muted text-lg leading-relaxed">
+          Learn a concept, try examples, and complete interactive worksheets right here on the website. Get feedback and hints as you practise.
+        </p>
 
-        function updateScoreTracker() {
-            document.getElementById('score-counter').innerText = `${correctScores} Correct`;
-        }
+        <div class="flex flex-wrap gap-3">
+          <button class="btn btn-primary" onclick="switchView('prime_composite')">
+            ✨ Explore number types
+          </button>
 
-        function resetScores() {
-            correctScores = 0;
-            updateScoreTracker();
-        }
+          <button class="btn btn-soft" onclick="switchView('algebra')">
+            🌿 Start algebra
+          </button>
+        </div>
 
-        /* Prime Checker Tool Logic */
-        function checkPrimeInteractive() {
-            const val = parseInt(document.getElementById('prime-input').value);
-            const resEl = document.getElementById('prime-checker-result');
-            resEl.classList.remove('hidden');
+      </div>
+    </div>
 
-            if (isNaN(val) || val < 0) {
-                resEl.className = "p-4 rounded-2xl text-sm bg-red-50 text-red-900 border border-red-200";
-                resEl.innerText = "Please enter a valid positive whole number.";
-                return;
-            }
+    <!-- Study module cards -->
+    <div>
+      <div class="flex items-end justify-between gap-3 mb-5">
+        <h2 class="text-2xl font-bold font-quicksand">Study modules</h2>
+        <span class="text-sm text-pastel-muted">Choose a topic to begin</span>
+      </div>
 
-            if (val === 0 || val === 1) {
-                resEl.className = "p-4 rounded-2xl text-sm bg-pastel-yellow text-amber-950 border border-amber-300";
-                resEl.innerHTML = `⚠️ <strong>${val} is neither Prime nor Composite!</strong> By math convention, 1 has only one factor (itself) and 0 has infinitely many factors.`;
-                return;
-            }
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
 
-            const factors = [];
-            for (let i = 1; i <= val; i++) {
-                if (val % i === 0) factors.push(i);
-            }
+        <button onclick="switchView('prime_composite')" class="paper-card sticky-note-blush rounded-3xl p-6 text-left">
+          <span class="text-3xl">🔢</span>
+          <h3 class="font-bold text-xl mt-3 mb-2">Prime & Composite</h3>
+          <p class="text-sm text-pink-950/80">Explore factors, test numbers, and use the 1–100 grid.</p>
+          <div class="mt-5 text-sm font-semibold">Open worksheet →</div>
+        </button>
 
-            if (factors.length === 2) {
-                resEl.className = "p-4 rounded-2xl text-sm bg-pastel-blush text-pink-950 border border-pink-300";
-                resEl.innerHTML = `🌟 <strong>${val} is a PRIME number!</strong><br>It can only be divided evenly by 1 and ${val}.<br><span class="font-mono text-xs">Factors (${factors.length}): ${factors.join(', ')}</span>`;
-            } else {
-                resEl.className = "p-4 rounded-2xl text-sm bg-pastel-sage text-green-950 border border-green-300";
-                resEl.innerHTML = `🧱 <strong>${val} is a COMPOSITE number!</strong><br>It has more than two factors.<br><span class="font-mono text-xs">Factors (${factors.length}): ${factors.join(', ')}</span>`;
-            }
-        }
+        <button onclick="switchView('algebra')" class="paper-card sticky-note-lavender rounded-3xl p-6 text-left">
+          <span class="text-3xl">🌿</span>
+          <h3 class="font-bold text-xl mt-3 mb-2">Algebra</h3>
+          <p class="text-sm text-purple-950/80">Solve equations by keeping both sides balanced.</p>
+          <div class="mt-5 text-sm font-semibold">Open worksheet →</div>
+        </button>
+        
+        <button onclick="switchView('fraction')" class="paper-card sticky-note-peach rounded-3xl p-6 text-left">
+          <span class="text-3
+              
+          <p class="text-sm text-pastel-muted mt-1">Check your answers and learn from the feedback.</p>
+        </div>
+      </div>
+    </div>
 
-        /* Sieve 1-100 Grid Generator */
-        function buildSieveGrid() {
-            const sieveContainer = document.getElementById('sieve-grid');
-            if (!sieveContainer) return;
-            sieveContainer.innerHTML = '';
+  </section>
 
-            for (let i = 1; i <= 100; i++) {
-                const isPrime = checkIsPrimeBool(i);
-                const btn = document.createElement('button');
-                
-                if (i === 1) {
-                    btn.className = "p-2 rounded-lg text-xs font-semibold bg-gray-100 text-gray-400 border border-gray-200 hover:opacity-80 transition-all";
-                } else if (isPrime) {
-                    btn.className = "p-2 rounded-lg text-xs font-bold bg-pastel-blush text-pink-950 border border-pink-300 hover:scale-105 transition-all";
-                } else {
-                    btn.className = "p-2 rounded-lg text-xs font-medium bg-white text-pastel-ink border border-gray-200 hover:bg-pastel-cream transition-all";
-                }
-                
-                btn.innerText = i;
-                btn.onclick = () => showSieveDetail(i);
-                sieveContainer.appendChild(btn);
-            }
-        }
+  <!-- PRIME AND COMPOSITE LESSON -->
+  <section id="view-prime_composite" class="hidden space-y-7">
 
-        function checkIsPrimeBool(n) {
-            if (n <= 1) return false;
-            for (let i = 2; i <= Math.sqrt(n); i++) {
-                if (n % i === 0) return false;
-            }
-            return true;
-        }
+    <div class="paper-card rounded-3xl p-7 md:p-9">
+      <span class="text-sm font-bold uppercase tracking-wide text-purple-800">Lesson 01</span>
+      <h1 class="text-3xl md:text-4xl font-bold font-quicksand mt-2">Prime & Composite Numbers</h1>
+      <p class="text-pastel-muted mt-3">Learn how factors help us classify whole numbers.</p>
 
-        function showSieveDetail(num) {
-            const detailEl = document.getElementById('sieve-detail');
-            detailEl.classList.remove('hidden');
+      <div class="grid md:grid-cols-2 gap-5 mt-7">
+        <div class="sticky-note-lavender rounded-2xl p-5">
+          <h2 class="text-xl font-bold mb-2">🌟 Prime numbers</h2>
+          <p>A prime number is a whole number greater than 1 with exactly two positive factors: 1 and itself.</p>
+          <p class="mt-3 font-semibold">Examples: 2, 3, 5, 7, 11</p>
+        </div>
 
-            const factors = [];
-            for (let i = 1; i <= num; i++) {
-                if (num % i === 0) factors.push(i);
-            }
+        <div class="sticky-note-peach rounded-2xl p-5">
+          <h2 class="text-xl font-bold mb-2">🍑 Composite numbers</h2>
+          <p>A composite number is a whole number greater than 1 with more than two positive factors.</p>
+          <p class="mt-3 font-semibold">Examples: 4, 6, 8, 9, 10</p>
+        </div>
+      </div>
 
-            const typeStr = num <= 1 ? "Special Case (Neither Prime nor Composite)" : (factors.length === 2 ? "Prime Number" : "Composite Number");
-            detailEl.innerHTML = `<strong>Number ${num}:</strong> ${typeStr} &bull; Factors: [${factors.join(', ')}]`;
-        }
+      <div class="sticky-note-yellow rounded-2xl p-5 mt-5">
+        <h3 class="font-bold text-lg">Remember!</h3>
+        <p>1 is neither prime nor composite. The number 2 is the only even prime number.</p>
+      </div>
+    </div>
 
-        function askPreset(txt) {
-            document.getElementById('chat-input').value = txt;
-        }
+    <div class="paper-card rounded-3xl p-6 md:p-8">
+      <h2 class="text-2xl font-bold font-quicksand">🔍 Interactive factor checker</h2>
+      <p class="text-pastel-muted mt-2">Enter a whole number to discover its factors and classification.</p>
 
-        const chatHistory = [
-            {
-                role: "user",
-                parts: [{ text: "System Instruction: You are a friendly, encouraging math tutor specializing in algebra, fractions, decimals, integers, and prime & composite numbers. Give concise, warm, step-by-step explanations." }]
-            }
-        ];
+      <div class="flex flex-col sm:flex-row gap-3 mt-5">
+        <input id="factor-number" type="number" min="1" max="1000" value="12" class="answer-input" placeholder="Enter a whole number">
+        <button class="btn btn-primary" onclick="checkFactors()">Check number</button>
+      </div>
 
-        async function handleChatSubmit(event) {
-            event.preventDefault();
-            const inputEl = document.getElementById('chat-input');
-            const query = inputEl.value.trim();
-            if (!query) return;
+      <div id="factor-result" class="mt-5" aria-live="polite">
+        <p class="text-pastel-muted">Your result will appear here.</p>
+      </div>
+    </div>
 
-            const chatMessages = document.getElementById('chat-messages');
+    <div class="paper-card rounded-3xl p-6 md:p-8">
+      <h2 class="text-2xl font-bold font-quicksand">🎨 Prime number grid</h2>
+      <p class="text-pastel-muted mt-2">Select a number from 1 to 100 to see whether it is prime or composite.</p>
 
-            chatMessages.innerHTML += `
-                <div class="flex items-start justify-end space-x-3">
-                    <div class="paper-card p-4 rounded-2xl rounded-tr-sm text-pastel-ink bg-pastel-cream max-w-[85%]">
-                        <p>${escapeHtml(query)}</p>
-                    </div>
-                    <div class="w-8 h-8 rounded-full bg-pastel-lavender flex items-center justify-center font-bold flex-shrink-0">You</div>
-                </div>
-            `;
+      <div id="number-grid" class="grid grid-cols-5 sm:grid-cols-10 gap-2 mt-5"></div>
+      <div id="grid-result" class="mt-4 text-sm text-pastel-muted" aria-live="polite">Choose a number to begin.</div>
 
-            inputEl.value = '';
-            chatMessages.scrollTop = chatMessages.scrollHeight;
+      <div class="flex flex-wrap gap-4 mt-4 text-sm">
+        <span>🩷 Prime</span>
+        <span>⬜ Other numbers</span>
+      </div>
+    </div>
 
-            const loadingId = 'loading-' + Date.now();
-            chatMessages.innerHTML += `
-                <div id="${loadingId}" class="flex items-start space-x-3">
-                    <div class="w-8 h-8 rounded-full bg-pastel-peach flex items-center justify-center font-bold flex-shrink-0">AI</div>
-                    <div class="paper-card p-4 rounded-2xl rounded-tl-sm text-pastel-muted animate-pulse">
-                        Thinking and preparing explanation...
-                    </div>
-                </div>
-            `;
-            chatMessages.scrollTop = chatMessages.scrollHeight;
+    <div class="paper-card rounded-3xl p-6 md:p-8">
+      <h2 class="text-2xl font-bold font-quicksand">📺 Video lesson</h2>
+      <p class="text-pastel-muted mt-2 mb-4">Watch a lesson about prime and composite numbers.</p>
 
-            chatHistory.push({ role: "user", parts: [{ text: query }] });
+      <div class="video-box">
+        <iframe src="https://www.youtube-nocookie.com/embed/0W2i3YwM8oY" title="Prime and composite numbers lesson" loading="lazy" allowfullscreen></iframe>
+      </div>
+    </div>
 
-            try {
-                const response = await callGeminiAPIWithBackoff(chatHistory);
-                document.getElementById(loadingId).remove();
+    <div class="paper-card rounded-3xl p-6 md:p-8">
+      <h2 class="text-2xl font-bold font-quicksand">📝 Interactive worksheet</h2>
+      <p class="text-pastel-muted mt-2 mb-5">Answer each question, check your work, and use hints when you need them.</p>
+      <div id="worksheet-prime_composite"></div>
+    </div>
 
-                if (response) {
-                    chatHistory.push({ role: "model", parts: [{ text: response }] });
-                    chatMessages.innerHTML += `
-                        <div class="flex items-start space-x-3">
-                            <div class="w-8 h-8 rounded-full bg-pastel-peach flex items-center justify-center font-bold flex-shrink-0">AI</div>
-                            <div class="paper-card p-4 rounded-2xl rounded-tl-sm text-pastel-ink space-y-2 max-w-[85%]">
-                                <p>${formatAiResponse(response)}</p>
-                            </div>
-                        </div>
-                    `;
-                }
-            } catch (err) {
-                document.getElementById(loadingId).remove();
-                chatMessages.innerHTML += `
-                    <div class="flex items-start space-x-3">
-                        <div class="w-8 h-8 rounded-full bg-pastel-peach flex items-center justify-center font-bold flex-shrink-0">AI</div>
-                        <div class="paper-card p-4 rounded-2xl rounded-tl-sm text-red-800 bg-red-50">
-                            <p>Oops! Network connection issue. Please try again! 🌱</p>
-                        </div>
-                    </div>
-                `;
-            }
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
+  </section>
 
-        async function callGeminiAPIWithBackoff(history, retries = 3, delay = 1000) {
-            const apiKey = "";
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+  <!-- ALGEBRA LESSON -->
+  <section id="view-algebra" class="hidden space-y-7">
 
-            for (let i = 0; i < retries; i++) {
-                try {
-                    const res = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ contents: history })
-                    });
-                    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-                    const data = await res.json();
-                    return data.candidates?.[0]?.content?.parts?.[0]?.text;
-                } catch (e) {
-                    if (i === retries - 1) throw e;
-                    await new Promise(resolve => setTimeout(resolve, delay));
-                    delay *= 2;
-                }
-            }
-            return null;
-        }
+    <div class="paper-card rounded-3xl p-7 md:p-9">
+      <span class="text-sm font-bold uppercase tracking-wide text-purple-800">Lesson 02</span>
+      <h1 class="text-3xl md:text-4xl font-bold font-quicksand mt-2">Algebra</h1>
+      <p class="text-pastel-muted mt-3">Algebra uses letters or symbols to represent unknown numbers.</p>
 
-        function escapeHtml(text) {
-            const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
-            return text.replace(/[&<>"']/g, m => map[m]);
-        }
+      <div class="sticky-note-lavender rounded-2xl p-5 mt-6">
+        <h2 class="text-xl font-bold mb-2">What is a variable?</h2>
+        <p>In the equation <strong>x + 3 = 8</strong>, the letter x represents a number we do not know yet.</p>
+      </div>
 
-        function formatAiResponse(text) {
-            return escapeHtml(text).replace(/\n/g, '<br>');
-        }
+      <div class="grid sm:grid-cols-2 gap-4 mt-5">
+        <div class="sticky-note-sage rounded-2xl p-5">
+          <h3 class="font-bold">Example 1: Addition</h3>
+          <p class="mt-2">x + 4 = 10</p>
+          <p>Subtract 4 from both sides.</p>
+          <p class="font-bold mt-2">x = 6</p>
+        </div>
 
-        window.onload = function() {
-            buildSieveGrid();
-        };
-    </script>
+        <div class="sticky-note-peach rounded-2xl p-5">
+          <h3 class="font-bold">Example 2: Multiplication</h3>
+          <p class="mt-2">3x = 15</p>
+          <p>Divide both sides by 3.</p>
+          <p class="font-bold mt-2">x = 5</p>
+        </div>
+      </div>
+
+      <div class="sticky-note-yellow rounded-2xl p-5 mt-5">
+        <h3 class="font-bold">💡 Helpful hint</h3>
+        <p>Whatever operation you use to solve one side of an equation, use the same operation on the other side to keep it balanced.</p>
+      </div>
+    </div>
+
+    <div class="paper-card rounded-3xl p-6 md:p-8">
+      <h2 class="text-2xl font-bold font-quicksand">📺 Video lesson</h2>
+      <p class="text-pastel-muted mt-2 mb-4">Review how to solve basic algebra equations.</p>
+
+      <div class="video-box">
+        <iframe src="https://www.youtube-nocookie.com/embed/NybHckSEQBI" title="Basic algebra lesson" loading="lazy" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <div class="paper-card rounded-3xl p-6 md:p-8">
+      <h2 class="text-2xl font-bold font-quicksand">📝 Interactive worksheet</h2>
+      <p class="text-pastel-muted mt-2 mb-5">Solve for the unknown variable.</p>
+      <div id="worksheet-algebra"></div>
+    </div>
+
+  </section>
+
+  <!-- FRACTIONS LESSON -->
+  <section id="view-fraction" class="hidden space-y-7">
+
+    <div class="paper-card rounded-3xl p-7 md:p-9">
+      <span class="text-sm font-bold uppercase tracking-wide text-purple-800">Lesson 03</span>
+      <h1 class="text-3xl md:text-4xl font-bold font-quicksand mt-2">Fractions</h1>
+      <p class="text-pastel-muted mt-3">Fractions represent parts of a whole.</p>
+
+      <div class="grid md:grid-cols-2 gap-5 mt-6">
+        <div class="sticky-note-peach rounded-2xl p-5">
+          <h2 class="text-xl font-bold mb-2">🍰 Numerator</h2>
+          <p>The top number tells you how many parts are being considered.</p>
+          <div class="text-4xl font-bold text-center mt-4">3</div>
+          <div class="border-t-2 border-current my-1"></div>
+          <div class="text-4xl font-bold text-center">4</div>
+        </div>
+
+        <div class="sticky-note-lavender rounded-2xl p-5">
+          <h2 class="text-xl font-bold mb-2">🥧 Denominator</h2>
+          <p>The bottom number tells you how many equal parts make up the whole.</p>
+          <p class="mt-4">For <strong>3/4</strong>, the whole is divided into four equal parts, and three are considered.</p>
+        </div>
+      </div>
+
+      <div class="sticky-note-sage rounded-2xl p-5 mt-5">
+        <h3 class="font-bold text-lg">Equivalent fractions</h3>
+        <p class="mt-2">Equivalent fractions have the same value.</p>
+        <p class="font-bold mt-2">1/2 = 2/4 = 3/6</p>
+        <p class="text-sm mt-2">Multiply or divide the numerator and denominator by the same non-zero number.</p>
+      </div>
+    </div>
+
+    <div class="paper-card rounded-3xl p-6 md:p-8">
+      <h2 class="text-2xl font-bold font-quicksand">📺 Video lesson</h2>
+      <p class="text-pastel-muted mt-2 mb-4">Review fractions and equivalent fractions.</p>
+
+      <div class="video-box">
+        <iframe src="https://www.youtube-nocookie.com/embed/p33BYf1NDAE" title="Fractions lesson" loading="lazy" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <div class="paper-card rounded-3xl p-6 md:p-8">
+      <h2 class="text-2xl font-bold font-quicksand">📝 Interactive worksheet</h2>
+      <p class="text-pastel-muted mt-2 mb-5">Practise fraction concepts and calculations.</p>
+      <div id="worksheet-fraction"></div>
+    </div>
+
+  </section>
+  
+  <!-- DECIMALS LESSON -->
+  <section id="view-decimal" class="hidden space-y-7">
+    <div class="paper-card rounded-3xl p-7 md:p-9">
+      <span class="text-sm font-bold uppercase tracking-wide text-purple-800">Lesson 04</span>
+      <h1 class="text-3xl md:text-4xl font-bold font-quicksand mt-2">Decimals</h1>
+      <p class="text-pastel-muted mt-3">Decimals represent parts of a whole using place value.</p>
+
+      <div class="sticky-note-yellow rounded-2xl p-5 mt-6">
+        <h2 class="text-xl font-bold mb-2">Place value example</h2>
+        <p class="text-3xl font-bold">4.75</p>
+        <p class="mt-3">4 = ones, 7 = tenths, 5 = hundredths.</p>
+        <p class="text-sm mt-2">The first digit after the decimal point is the tenths place.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-4 mt-5">
+        <div class="sticky-note-sage rounded-2xl p-5">
+          <h3 class="font-bold">Comparing decimals</h3>
+          <p class="mt-2">0.8 is greater than 0.65 because 0.80 is greater than 0.65.</p>
+        </div>
+        <div class="sticky-note-peach rounded-2xl p-5">
+          <h3 class="font-bold">Adding decimals</h3>
+          <p class="mt-2">Line up the decimal points.</p>
+          <p class="font-bold mt-2">1.25 + 0.50 = 1.75</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="paper-card rounded-3xl p-6 md:p-8">
+      <h2 class="text-2xl font-bold font-quicksand">📺 Video lesson</h2>
+      <p class="text-pastel-muted mt-2 mb-4">Review decimal place value and calculations.</p>
+      <div class="video-box">
+        <iframe src="https://www.youtube-nocookie.com/embed/3XOt1fjWKi8" title="Decimal lesson" loading="lazy" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <div class="paper-card rounded-3xl p-6 md:p-8">
+      <h2 class="text-2xl font-bold font-quicksand">📝 Interactive worksheet</h2>
+      <p class="text-pastel-muted mt-2 mb-5">Enter your answers and check your work.</p>
+      <div id="worksheet-decimal"></div>
+    </div>
+  </section>
+
+  <!-- INTEGERS LESSON -->
+  <section id="view-integer" class="hidden space-y-7">
+    <div class="paper-card rounded-3xl p-7 md:p-9">
+      <span class="text-sm font-bold uppercase tracking-wide text-purple-800">Lesson 05</span>
+      <h1 class="text-3xl md:text-4xl font-bold font-quicksand mt-2">Integers</h1>
+      <p class="text-pastel-muted mt-3">Integers include negative whole numbers, zero, and positive whole numbers.</p>
+
+      <div class="sticky-note-blue rounded-2xl p-5 mt-6">
+        <h2 class="text-xl font-bold mb-2">The number line</h2>
+        <div class="flex justify-between text-sm font-bold mt-5 mb-2">
+          <span>-3</span><span>-2</span><span>-1</span><span>0</span><span>1</span><span>2</span><span>3</span>
+        </div>
+        <div class="h-1 bg-slate-400 rounded relative">
+          <span class="absolute left-1/2 -top-2.5 -translate-x-1/2 text-xl">⬇️</span>
+        </div>
+        <p class="text-sm mt-5">Numbers farther to the right are greater. Numbers farther to the left are smaller.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-4 mt-5">
+        <div class="sticky-note-sage rounded-2xl p-5">
+          <h3 class="font-bold">Adding integers</h3>
+          <p class="mt-2">3 + (-5) = -2</p>
+          <p class="text-sm mt-2">Start at 3 and move 5 spaces left.</p>
+        </div>
+        <div class="sticky-note-lavender rounded-2xl p-5">
+          <h3 class="font-bold">Subtracting integers</h3>
+          <p class="mt-2">2 - 5 = -3</p>
+          <p class="text-sm mt-2">Start at 2 and move 5 spaces left.</p>
+        </div>
+      </div>
+
+      <div class="sticky-note-yellow rounded-2xl p-5 mt-5">
+        <h3 class="font-bold">💡 Remember</h3>
+        <p>Zero is neither positive nor negative.</p>
+      </div>
+    </div>
+
+    <div class="paper-card rounded-3xl p-6 md:p-8">
+      <h2 class="text-2xl font-bold font-quicksand">📺 Video lesson</h2>
+      <p class="text-pastel-muted mt-2 mb-4">Review integers and negative numbers.</p>
+      <div class="video-box">
+        <iframe src="https://www.youtube-nocookie.com/embed/5juto2ze8Lg" title="Integers lesson" loading="lazy" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <div class="paper-card rounded-3xl p-6 md:p-8">
+      <h2 class="text-2xl font-bold font-quicksand">📝 Interactive worksheet</h2>
+      <p class="text-pastel-muted mt-2 mb-5">Practise comparing and calculating with integers.</p>
+      <div id="worksheet-integer"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="border-t border-pastel-lavender bg-white/70 py-6 px-4 text-center">
+  <p class="font-quicksand font-bold">Cozy Math Corner ☕</p>
+  <p class="text-sm text-pastel-muted mt-1">Learn at your own pace. Every step counts!</p>
+</footer>
+
+<script>
+const worksheets = {
+  prime_composite: [
+    {q:"Which number is prime?", options:["9","11","15","21"], a:"11", hint:"A prime number has exactly two positive factors.", explain:"11 has only two positive factors: 1 and 11."},
+    {q:"Is 18 prime or composite?", options:["Prime","Composite","Neither"], a:"Composite", hint:"Try dividing 18 by 2.", explain:"18 is composite because it has factors including 1, 2, 3, 6, 9, and 18."},
+    {q:"How many positive factors does 7 have?", options:["1","2","3","7"], a:"2", hint:"Which whole numbers divide 7 exactly?", explain:"7 has exactly two positive factors: 1 and 7."},
+    {q:"Which number is neither prime nor composite?", options:["0","1","2","4"], a:"1", hint:"It is the first positive whole number.", explain:"1 has only one positive factor, so it is neither prime nor composite."},
+    {q:"Which is the only even prime number?", options:["2","4","6","8"], a:"2", hint:"Every other even number greater than 2 has more than two factors.", explain:"2 has exactly two positive factors: 1 and 2."}
+  ],
+  algebra: [
+    {q:"Solve: x + 4 = 10", options:["4","5","6","14"], a:"6", hint:"Subtract 4 from both sides.", explain:"x = 10 - 4 = 6."},
+    {q:"Solve: x - 3 = 8", options:["5","11","24","-5"], a:"11", hint:"Add 3 to both sides.", explain:"x = 8 + 3 = 11."},
+    {q:"Solve: 3x = 15", options:["3","5","12","45"], a:"5", hint:"Divide both sides by 3.", explain:"x = 15 ÷ 3 = 5."},
+    {q:"Solve: x ÷ 4 = 6", options:["2","10","24","28"], a:"24", hint:"Multiply both sides by 4.", explain:"x = 6 × 4 = 24."},
+    {q:"If y + 7 = 12, what is y?", options:["4","5","7","19"], a:"5", hint:"Subtract 7 from 12.", explain:"y = 12 - 7 = 5."}
+  ],
+  fraction: [
+    {q:"What is the numerator in 3/5?", options:["3","5","8","2"], a:"3", hint:"The numerator is the top number.", explain:"In 3/5, the numerator is 3."},
+    {q:"Which fraction is equivalent to 1/2?", options:["2/3","2/4","3/4","1/3"], a:"2/4", hint:"Multiply both the top and bottom of 1/2 by 2.", explain:"1/2 = 2/4 because both fractions represent the same value."},
+    {q:"What is 1/4 + 2/4?", options:["3/8","3/4","2/4","1/2"], a:"3/4", hint:"The denominators are the same, so add the numerators.", explain:"1/4 + 2/4 = 3/4."},
+    {q:"What is 3/4 of 20?", options:["5","10","15","16"], a:"15", hint:"Find one quarter of 20 first.", explain:"20 ÷ 4 = 5, and 5 × 3 = 15."},
+    {q:"Which fraction is the largest?", options:["1/2","1/4","3/4","1/8"], a:"3/4", hint:"These fractions have the same numerator except 3/4. Compare their sizes.", explain:"3/4 is greater than 1/2, 1/4, and 1/8."}
+  ],
+  decimal: [
+    {q:"What digit is in the tenths place in 4.75?", options:["4","7","5","0"], a:"7", hint:"The tenths place is the first digit after the decimal point.", explain:"In 4.75, 7 is in the tenths place."},
+    {q:"Which decimal is greater?", options:["0.6","0.56","0.45","0.09"], a:"0.6", hint:"Write 0.6 as 0.60 to compare.", explain:"0.60 is greater than 0.56, 0.45, and 0.09."},
+    {q:"Calculate: 1.25 + 0.50", options:["1.30","1.50","1.75","2.25"], a:"1.75", hint:"Line up the decimal points.", explain:"1.25 + 0.50 = 1.75."},
+    {q:"What is 4.7 written in words?", options:["Four point seven","Forty-seven","Four hundred seven","Four point seventy"], a:"Four point seven", hint:"Read the digits on each side of the decimal point.", explain:"4.7 is read as four point seven."},
+    {q:"Calculate: 3.00 - 1.25", options:["1.25","1.50","1.75","2.25"], a:"1.75", hint:"Write 3.00 as 3.00 and subtract by place value.", explain:"3.00 - 1.25 = 1.75."}
+  ],
+  integer: [
+    {q:"Which number is negative?", options:["4","0","-3","8"], a:"-3", hint:"Negative numbers have a minus sign.", explain:"-3 is a negative integer."},
+    {q:"Which number is greatest?", options:["-5","-2","-8","-1"], a:"-1", hint:"On a number line, numbers farther right are greater.", explain:"-1 is the greatest because it is closest to zero on the right."},
+    {q:"Calculate: 3 + (-5)", options:["8","-8","2","-2"], a:"-2", hint:"Start at 3 and move 5 places left.", explain:"3 + (-5) = -2."},
+    {q:"Calculate: -4 + 7", options:["-11","-3","3","11"], a:"3", hint:"Start at -4 and move 7 places right.", explain:"-4 + 7 = 3."},
+    {q:"Which statement is true?", options:["-5 > -2","-3 > 1","0 > -4","-1 > 2"], a:"0 > -4", hint:"Zero is greater than every negative number.", explain:"0 is to the right of -4 on a number line, so 0 > -4."}
+  ]
+};
+
+const state = {};
+Object.keys(worksheets).forEach(key => {
+  state[key] = {index:0, answered:false, correct:0, attempts:0};
+});
+
+let totalCorrect = 0;
+let totalAttempts = 0;
+
+function switchView(view) {
+  document.querySelectorAll('main > section').forEach(section => {
+    section.classList.add('hidden');
+  });
+
+  const target = document.getElementById('view-' + view);
+  if (target) target.classList.remove('hidden');
+
+  document.querySelectorAll('nav .topic-btn').forEach(button => {
+    button.classList.remove('active');
+  });
+
+  const navButton = document.getElementById('nav-' + view);
+  if (navButton) navButton.classList.add('active');
+
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function checkFactors() {
+  const input = document.getElementById('factor-number');
+  const result = document.getElementById('factor-result');
+  const n = Number(input.value);
+
+  if (!Number.isInteger(n) || n < 1 || n > 1000) {
+    result.innerHTML = '<div class="feedback try">Please enter a whole number from 1 to 1000.</div>';
+    return;
+  }
+
+  const factors = [];
+  for (let i = 1; i <= n; i++) {
+    if (n % i === 0) factors.push(i);
+  }
+
+  let classification;
+  if (n === 1) classification = 'Neither prime nor composite';
+  else if (factors.length === 2) classification = 'Prime number 🌟';
+  else classification = 'Composite number 🍑';
+
+  result.innerHTML = `
+    <div class="sticky-note-sage rounded-2xl p-5">
+      <h3 class="text-xl font-bold">${n}: ${classification}</h3>
+      <p class="mt-2"><strong>Factors:</strong> ${factors.join(', ')}</p>
+      <p class="text-sm mt-2">This number has ${factors.length} positive factor${factors.length === 1 ? '' : 's'}.</p>
+    </div>`;
+}
+
+function isPrime(n) {
+  if (n < 2) return false;
+  for (let i = 2; i * i <= n; i++) {
+    if (n % i === 0) return false;
+  }
+  return true;
+}
+
+function createNumberGrid() {
+  const grid = document.getElementById('number-grid');
+
+  for (let n = 1; n <= 100; n++) {
+    const button = document.createElement('button');
+    button.textContent = n;
+    button.className = 'sieve-cell' + (isPrime(n) ? ' prime' : '');
+    button.setAttribute('aria-label', 'Check number ' + n);
+
+    button.addEventListener('click', () => {
+      grid.querySelectorAll('button').forEach(cell => cell.classList.remove('selected'));
+      button.classList.add('selected');
+
+      let label;
+      if (n === 1) label = 'Neither prime nor composite';
+      else if (isPrime(n)) label = 'Prime number 🌟';
+      else label = 'Composite number 🍑';
+
+      document.getElementById('grid-result').textContent =
+        n + ' is ' + label + (n === 1 ? '.' : '. Its factors are ' +
+        Array.from({length:n}, (_,i) => i + 1).filter(i => n % i === 0).join(', ') + '.');
+    });
+
+    grid.appendChild(button);
+  }
+}
+
+function renderWorksheet(topic) {
+  const container = document.getElementById('worksheet-' + topic);
+  const data = worksheets[topic];
+  const s = state[topic];
+
+  if (!container || !data) return;
+
+  if (s.index >= data.length) {
+    container.innerHTML = `
+      <div class="sticky-note-sage rounded-2xl p-6 text-center">
+        <div class="text-4xl mb-3">🎉</div>
+        <h3 class="text-2xl font-bold">Worksheet complete!</h3>
+        <p class="mt-2">You got ${s.correct} out of ${data.length} questions correct on your first check.</p>
+        <p class="text-sm mt-2">You can try the worksheet again to practise more.</p>
+        <button class="btn btn-primary mt-5" onclick="restartWorksheet('${topic}')">Try again</button>
+      </div>`;
+    return;
+  }
+
+  const q = data[s.index];
+
+  container.innerHTML = `
+    <div class="flex justify-between gap-3 text-sm text-pastel-muted mb-3">
+      <span>Question ${s.index + 1} of ${data.length}</span>
+      <span>${s.correct} correct</span>
+    </div>
+
+    <div class="progress-track mb-5">
+      <div class="progress-fill" style="width:${s.index / data.length * 100}%"></div>
+    </div>
+
+    <div class="sticky-note-lavender rounded-2xl p-5">
+      <h3 class="text-lg sm:text-xl font-bold">${q.q}</h3>
+    </div>
+
+    <div class="grid sm:grid-cols-2 gap-3 mt-4">
+      ${q.options.map((option,i) => `
+        <button class="btn btn-soft text-left" onclick="selectAnswer('${topic}',${i})" id="option-${topic}-${i}">
+          ${String.fromCharCode(65+i)}. ${option}
+        </button>
+      `).join('')}
+    </div>
+
+    <div class="flex flex-wrap gap-3 mt-5">
+      <button class="btn btn-primary" onclick="checkAnswer('${topic}')">Check answer</button>
+      <button class="btn btn-soft" onclick="showHint('${topic}')">💡 Hint</button>
+      <button class="btn btn-soft" onclick="skipQuestion('${topic}')">Skip</button>
+    </div>
+
+    <div id="feedback-${topic}" aria-live="polite"></div>
+    <div id="hint-${topic}"></div>
+  `;
+}
+
+function selectAnswer(topic, index) {
+  if (state[topic].answered) return;
+
+  state[topic].selected = index;
+
+  worksheets[topic][state[topic].index].options.forEach((option,i) => {
+    const button = document.getElementById('option-' + topic + '-' + i);
+    if (!button) return;
+
+    button.classList.toggle('btn-primary', i === index);
+    button.classList.toggle('btn-soft', i !== index);
+  });
+}
+
+function checkAnswer(topic) {
+  const s = state[topic];
+  if (s.answered) return;
+
+  const q = worksheets[topic][s.index];
+  const feedback = document.getElementById('feedback-' + topic);
+
+  if (s.selected === undefined) {
+    feedback.innerHTML = '<div class="feedback hint">Choose an answer first!</div>';
+    return;
+  }
+
+  const chosen = q.options[s.selected];
+  const correct = chosen === q.a;
+
+  s.answered = true;
+  s.attempts++;
+  totalAttempts++;
+
+  if (correct) {
+    s.correct++;
+    totalCorrect++;
+    feedback.innerHTML = `
+      <div class="feedback good">
+        <strong>Correct! 🎉</strong><br>${q.explain}
+      </div>`;
+  } else {
+    feedback.innerHTML = `
+      <div class="feedback try">
+        <strong>Not quite — keep learning!</strong><br>
+        Your answer: ${chosen}<br>
+        Correct answer: ${q.a}<br>
+        ${q.explain}
+      </div>`;
+  }
+
+  updateProgress();
+
+  const controls = document.querySelectorAll('#worksheet-' + topic + ' .grid button');
+  controls.forEach(button => button.disabled = true);
+
+  const action = document.createElement('button');
+  action.className = 'btn btn-primary mt-4';
+  action.textContent = s.index === worksheets[topic].length - 1 ? 'Finish worksheet →' : 'Next question →';
+  action.onclick = () => {
+    s.index++;
+    s.answered = false;
+    s.selected = undefined;
+    renderWorksheet(topic);
+  };
+
+  feedback.appendChild(action);
+}
+
+function showHint(topic) {
+  const q = worksheets[topic][state[topic].index];
+  document.getElementById('hint-' + topic).innerHTML =
+    '<div class="feedback hint"><strong>💡 Hint:</strong> ' + q.hint + '</div>';
+}
+
+function skipQuestion(topic) {
+  const s = state[topic];
+  s.index++;
+  s.answered = false;
+  s.selected = undefined;
+  renderWorksheet(topic);
+}
+
+function restartWorksheet(topic) {
+  state[topic].index = 0;
+  state[topic].answered = false;
+  state[topic].selected = undefined;
+  state[topic].correct = 0;
+  state[topic].attempts = 0;
+  renderWorksheet(topic);
+}
+
+function updateProgress() {
+  document.getElementById('score-counter').textContent = totalCorrect + ' correct';
+  document.getElementById('attempt-counter').textContent = totalAttempts + ' attempted';
+
+  const percent = totalAttempts ? totalCorrect / totalAttempts * 100 : 0;
+  document.getElementById('overall-progress').style.width = percent + '%';
+
+  document.getElementById('progress-label').textContent =
+    totalAttempts ? Math.round(percent) + '% correct so far' : 'Start a worksheet to build your progress!';
+}
+
+function resetScores() {
+  totalCorrect = 0;
+  totalAttempts = 0;
+
+  Object.keys(worksheets).forEach(topic => {
+    state[topic] = {
+      index:0,
+      answered:false,
+      correct:0,
+      attempts:0,
+      selected:undefined
+    };
+    renderWorksheet(topic);
+  });
+
+  updateProgress();
+}
+
+createNumberGrid();
+Object.keys(worksheets).forEach(renderWorksheet);
+updateProgress();
+</script>
+
 </body>
 </html>
